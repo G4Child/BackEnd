@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Glass4Child.project.entities.Beneficent;
-import com.Glass4Child.project.repositories.beneficentRepository;
+import com.Glass4Child.project.repositories.BeneficentRepository;
 
 @Service
-public class beneficentService {
+public class BeneficentService {
 
-    @Autowired
-    private beneficentRepository repository;
+    private BeneficentRepository repository;
 
     public List<Beneficent> findAll() {
         return repository.findAll();

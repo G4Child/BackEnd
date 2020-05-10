@@ -1,49 +1,38 @@
 package com.Glass4Child.project.entities;
 
 
-
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.util.Objects;
 
-import javax.persistence.*;
 
-import com.Glass4Child.project.entities.address;
-//@Entity
-import javax.persistence.IdClass;
-
+@MappedSuperclass
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-   @OneToOne
-    private address address;
+
+    @Id
+    private String document;
     private String name;
     private String email;
-
-    private String document;
     private Long telephone;
     private String password;
+    private String cep;
 
     public User() {
     }
 
+    public User(String name, String email, Long telephone, String password, String document, String cep) {
+        super();
+        this.name = name;
+        this.email = email;
+        this.telephone = telephone;
+        this.password = password;
+        this.document = document;
+        this.cep = cep;
+    }
 
-
-
-
-	public User(String name, String email, Long telephone, String password, String document,
-			com.Glass4Child.project.entities.address address) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.telephone = telephone;
-		this.password = password;
-		this.document = document;
-		this.address = address;
-	}
-
-
-
-
-
-	public String getDocument() {
+    public String getDocument() {
         return document;
     }
 
@@ -84,27 +73,19 @@ public class User implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((document == null) ? 0 : document.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(document, user.document) &&
+                Objects.equals(telephone, user.telephone) &&
+                Objects.equals(password, user.password);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        if (document == null) {
-            if (other.document != null)
-                return false;
-        } else if (!document.equals(other.document))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(name, email, document, telephone, password);
     }
 }

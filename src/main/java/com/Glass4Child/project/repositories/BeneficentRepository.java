@@ -5,7 +5,7 @@ import com.Glass4Child.project.entities.Beneficent;
 
 import java.util.Optional;
 
-public interface beneficentRepository extends JpaRepository<Beneficent, Long> {
+public interface BeneficentRepository extends JpaRepository<Beneficent, Long> {
 
     Optional<Beneficent> findByDocument(String document);
 }
