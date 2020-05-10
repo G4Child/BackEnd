@@ -1,9 +1,7 @@
 package com.Glass4Child.project.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,10 +22,15 @@ public class Address implements Serializable {
     private String neighborhood;
     private String reference;
 
+    @OneToOne
+    @JoinColumn(name = "beneficent_id")
+    private Beneficent beneficent;
+
+
     public Address() {
     }
 
-    public Address(int number, String complement, String state, String city, String neighborhood, String reference, String streetAddress) {
+    public Address(int number, String complement, String state, String city, String neighborhood, String reference, String streetAddress, Beneficent beneficent) {
         this.number = number;
         this.complement = complement;
         this.state = state;
@@ -35,6 +38,19 @@ public class Address implements Serializable {
         this.neighborhood = neighborhood;
         this.reference = reference;
         this.streetAddress = streetAddress;
+        this.beneficent = beneficent;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Beneficent getBeneficent() {
+        return beneficent;
+    }
+
+    public void setBeneficent(Beneficent beneficent) {
+        this.beneficent = beneficent;
     }
 
     public Long getId() {

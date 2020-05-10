@@ -3,14 +3,15 @@ package com.Glass4Child.project.entities;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Beneficent extends User implements Serializable {
-
     private static final long serialVersionUID = 1L;
+
     private int donationLimit = 0;
     private int totalDonatedBeneficent = 0;
     private boolean everDonated = false;
@@ -33,6 +34,17 @@ public class Beneficent extends User implements Serializable {
         this.totalDonatedBeneficent = 0;
         this.everDonated = false;
         this.pseudonym = pseudonym;
+    }
+
+    @OneToOne(mappedBy = ("beneficent"))
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getDonationLimit() {
