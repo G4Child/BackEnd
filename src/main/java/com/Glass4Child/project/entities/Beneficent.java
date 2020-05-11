@@ -11,7 +11,6 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Beneficent extends User implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private int donationLimit = 0;
     private int totalDonatedBeneficent = 0;
     private boolean everDonated = false;
