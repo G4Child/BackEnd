@@ -12,6 +12,7 @@ import com.Glass4Child.project.repositories.BeneficentRepository;
 @Service
 public class BeneficentService {
 
+    @Autowired
     private BeneficentRepository repository;
 
     public List<Beneficent> findAll() {
