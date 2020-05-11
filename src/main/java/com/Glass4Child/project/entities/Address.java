@@ -1,5 +1,7 @@
 package com.Glass4Child.project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
@@ -22,8 +24,9 @@ public class Address implements Serializable {
     private String neighborhood;
     private String reference;
 
+    @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "beneficent_id")
+    @JoinColumn(name = "beneficent")
     private Beneficent beneficent;
 
 

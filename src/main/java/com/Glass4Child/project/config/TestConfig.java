@@ -25,10 +25,10 @@ public class TestConfig implements CommandLineRunner {
         Beneficent u2 = new Beneficent("Thales Oliveira", "thales@gmail.com", (long) 119999, "password12345", "12345678", 300, "Mr-Thalles", "500");
         Beneficent u3 = new Beneficent("Thauã Oliveira", "thaua@gmail.com", (long) 219999, "password113", "123456789", 300, 500, "Mr-Thalles", "39330-000");
 
-//        Address ad1 = new Address(5859, "Residencial Masculino", "SP", "Sao Paulo", "Capão Redondo", "UNASP", "Estrada de Itapecerica", "123456789" );
+        Address ad1 = new Address(5859, "Residencial Masculino", "SP", "Sao Paulo", "Capão Redondo", "UNASP", "Estrada de Itapecerica", u2 );
 //        Address ad2 = new Address(1349, null, "SP", "Sao Paulo", "Berrini", null, "Rua Arizona");
 
-//        addressRepository.saveAll(Arrays.asList(ad1, ad2));
         beneficentRepository.saveAll(Arrays.asList(u2, u3));
+        addressRepository.saveAll(Arrays.asList(ad1));
     }
 }
