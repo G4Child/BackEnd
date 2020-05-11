@@ -3,6 +3,7 @@ package com.Glass4Child.project.entities;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,19 +18,21 @@ public class User implements Serializable {
     private String email;
     private Long telephone;
     private String password;
-    private String cep;
+
+//    @OneToOne
+//    private Address address;
 
     public User() {
     }
 
-    public User(String name, String email, Long telephone, String password, String document, String cep) {
+    public User(String name, String email, Long telephone, String password, String document) {
         super();
         this.name = name;
         this.email = email;
         this.telephone = telephone;
         this.password = password;
         this.document = document;
-        this.cep = cep;
+//        this.address = address;
     }
 
     public String getDocument() {
@@ -39,6 +42,14 @@ public class User implements Serializable {
     public void setDocument(String document) {
         this.document = document;
     }
+
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 
     public String getName() {
         return name;

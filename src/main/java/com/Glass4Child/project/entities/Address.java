@@ -14,7 +14,8 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Column(name = "ID_ADDRESS")
+    private Long idAddress;
     //	private String postalAddressCode; //TO DO: IMPLEMENT CLASS postalAddressCode
     private int number;
     private String streetAddress;
@@ -25,28 +26,8 @@ public class Address implements Serializable {
     private String reference;
 
     @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "beneficent")
+    @OneToOne(mappedBy = "address")
     private Beneficent beneficent;
-
-
-    public Address() {
-    }
-
-    public Address(int number, String complement, String state, String city, String neighborhood, String reference, String streetAddress, Beneficent beneficent) {
-        this.number = number;
-        this.complement = complement;
-        this.state = state;
-        this.city = city;
-        this.neighborhood = neighborhood;
-        this.reference = reference;
-        this.streetAddress = streetAddress;
-        this.beneficent = beneficent;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Beneficent getBeneficent() {
         return beneficent;
@@ -56,8 +37,25 @@ public class Address implements Serializable {
         this.beneficent = beneficent;
     }
 
-    public Long getId() {
-        return id;
+    public Address() {
+    }
+
+    public Address(int number, String complement, String state, String city, String neighborhood, String reference, String streetAddress) {
+        this.number = number;
+        this.complement = complement;
+        this.state = state;
+        this.city = city;
+        this.neighborhood = neighborhood;
+        this.reference = reference;
+        this.streetAddress = streetAddress;
+    }
+
+    public void setIdAddress(Long id) {
+        this.idAddress = id;
+    }
+
+    public Long getIdAddress() {
+        return idAddress;
     }
 
     public int getNumber() {
@@ -122,7 +120,7 @@ public class Address implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
         return getNumber() == address.getNumber() &&
-                getId().equals(address.getId()) &&
+                getIdAddress().equals(address.getIdAddress()) &&
                 streetAddress.equals(address.streetAddress) &&
                 Objects.equals(getComplement(), address.getComplement()) &&
                 getState().equals(address.getState()) &&
@@ -133,6 +131,6 @@ public class Address implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNumber(), streetAddress, getComplement(), getState(), getCity(), getNeighborhood(), getReference());
+        return Objects.hash(getIdAddress(), getNumber(), streetAddress, getComplement(), getState(), getCity(), getNeighborhood(), getReference());
     }
 }
