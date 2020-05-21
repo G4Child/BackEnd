@@ -1,24 +1,29 @@
 package com.Glass4Child.project.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass @NoArgsConstructor @EqualsAndHashCode
 public abstract class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Getter
     private String document;
+    @Getter
     private String name;
+    @Getter @Setter
     private Long telephone;
+    @Getter @Setter
     private boolean isActive;
 
     @OneToOne
     protected Address address;
-
-    public User() {
-    }
 
     public User(String name, Long telephone, String document, Address address) {
         super();
@@ -29,58 +34,4 @@ public abstract class User implements Serializable {
         isActive = true;
     }
 
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(Long telephone) {
-        this.telephone = telephone;
-    }
-    
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return isActive() == user.isActive() &&
-                getDocument().equals(user.getDocument()) &&
-                getName().equals(user.getName()) &&
-                getTelephone().equals(user.getTelephone());
-    }
-
-    public int hashCode() {
-        return Objects.hash(getDocument(), getName(), getTelephone(), isActive());
-    }
 }
