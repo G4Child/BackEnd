@@ -18,18 +18,14 @@ public class Donate implements Serializable {
     private Long id;
     private Instant date;
     private String price;
-    @OneToMany
-    @JoinColumn(name="donate_id")
+
+    @OneToMany(mappedBy = "donate")
     private List<Record> record;
 
 
-    @ManyToMany
-    @JoinTable(name = "PaymentRecord")
-    private List<Payment> payments;
 
-    @ManyToMany
-    @JoinTable(name = "record")
-    private List<Glasses> glasses;
+
+
 
     @JoinColumn(name="beneficent_id")
     @ManyToOne
@@ -37,10 +33,10 @@ public class Donate implements Serializable {
     @OneToOne
     private Dependent dependent;
 
-    public Donate(Instant date, String price, List<Record> record, Beneficent beneficent, Dependent dependent) {
+    public Donate(Instant date, String price, Beneficent beneficent, Dependent dependent) {
         this.date = date;
         this.price = price;
-        this.record = record;
+
         this.beneficent = beneficent;
         this.dependent = dependent;
     }

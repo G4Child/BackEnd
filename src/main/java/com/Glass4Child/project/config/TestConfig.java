@@ -40,8 +40,8 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Payment py1 = new Payment(Instant.parse("1990-01-01T12:10:00.000Z"), "boleto");
         Payment py2 = new Payment(Instant.parse("1990-01-01T12:10:00.000Z"), "cartao");
-
-        PaymentRepository.saveAll(Arrays.asList(py1, py2));
+        Payment py3 = new Payment(Instant.parse("1981-12-01T12:10:00.000Z"), "dinheiro");
+        PaymentRepository.saveAll(Arrays.asList(py1, py2,py3));
 
         ArrayList<Payment> paymentList = new ArrayList<>();
         paymentList.add(py1);
@@ -76,22 +76,24 @@ public class TestConfig implements CommandLineRunner {
         Benefited benefited1 = new Benefited("Joao Alves", (long) 11921921, "394821911", 2, 3, "2020211", formatter.parse("1985-05-05"), ad3, dependentsList);
         benefitedRepository.saveAll(Arrays.asList(benefited1));
 
-        Record rec1 = new Record(formatter.parse("1985-05-05"), "ativo");
-        Record rec2 = new Record(formatter.parse("1985-06-05"), "no ativo");
-        ArrayList<Record> recordsList = new ArrayList<>();
-        recordsList.add(rec1);
-        recordsList.add(rec2);
 
-        RecordRepository.saveAll(Arrays.asList(rec1, rec2));
-        Glasses glasses1 = new Glasses(150, recordsList);
-        Glasses glasses2 = new Glasses(300, recordsList);
-        Glasses glasses3 = new Glasses(600, recordsList);
+
+        Glasses glasses1 = new Glasses(150);
+        Glasses glasses2 = new Glasses(300);
+        Glasses glasses3 = new Glasses(600);
         ArrayList<Glasses> glassesList = new ArrayList<Glasses>();
         glassesList.add(glasses1);
         glassesList.add(glasses2);
 
         GlasseRepository.saveAll(Arrays.asList(glasses1, glasses2, glasses3));
-        Donate donate = new Donate(Instant.parse("2020-01-01T12:10:00.000Z"), "150", recordsList, beneficent1, dep1);
-        DonateRepository.saveAll(Arrays.asList(donate));
+        Donate donate = new Donate(Instant.parse("2020-01-01T12:10:00.000Z"), "150",  beneficent1, dep1);
+        Donate donate1 = new Donate(Instant.parse("2019-11-01T12:10:00.000Z"), "300", beneficent1, dep1);
+        DonateRepository.saveAll(Arrays.asList(donate,donate1));
+        Record rec1 = new Record(formatter.parse("1985-05-05"), "ativo",paymentList,donate1,glasses1);
+        Record rec2 = new Record(formatter.parse("1985-06-05"), "no ativo",paymentList,donate,glasses2);
+        ArrayList<Record> recordsList = new ArrayList<>();
+        recordsList.add(rec1);
+        recordsList.add(rec2);
+        RecordRepository.saveAll(Arrays.asList(rec1, rec2));
     }
 }

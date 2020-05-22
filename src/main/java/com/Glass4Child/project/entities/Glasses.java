@@ -18,15 +18,13 @@ public class Glasses implements Serializable {
     private Long id;
     private float price;
 
-    @ManyToMany(mappedBy = "glasses")
-    private List<Donate> donate;
 
-    @OneToMany
-    @JoinColumn(name = "glasses_id")
+
+    @OneToMany(mappedBy = "glasses")
     private List<Record> record;
 
-    public Glasses(float price, List<Record> record) {
+    public Glasses(float price) {
         this.price = price;
-        this.record = record;
+
     }
 }

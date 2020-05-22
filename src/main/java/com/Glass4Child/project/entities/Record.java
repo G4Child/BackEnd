@@ -19,19 +19,26 @@ public class Record implements Serializable {
     private Long id;
     private Date date;
     private String status;
-
-    @JoinColumn(name = "donate_id")
-    @ManyToOne
-    private Donate donate;
-    @JoinColumn(name = "glasses_id")
-    @ManyToOne
-    private Glasses glasses;
     @ManyToMany
-    @JoinColumn(name = "paymentRecord")
+    @JoinTable(name = "paymentRecord")
     private List<Payment> payment;
 
-    public Record(Date date, String status) {
+
+
+
+    @ManyToOne
+    @JoinColumn(name="donate_id")
+    private Donate donate;
+    @ManyToOne
+    @JoinColumn(name = "glasses_id")
+    private Glasses glasses;
+
+
+    public Record(Date date, String status, List<Payment> payment, Donate donate, Glasses glasses) {
         this.date = date;
         this.status = status;
+        this.payment = payment;
+        this.donate = donate;
+        this.glasses = glasses;
     }
 }
