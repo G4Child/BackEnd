@@ -1,9 +1,7 @@
 package com.Glass4Child.project.services;
 
 import com.Glass4Child.project.entities.Donate;
-import com.Glass4Child.project.entities.Prescription;
 import com.Glass4Child.project.repositories.DonateRepository;
-import com.Glass4Child.project.repositories.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

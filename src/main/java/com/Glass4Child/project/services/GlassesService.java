@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class GlasseService {
-
+public class GlassesService {
     @Autowired
     private GlasseRepository repository;
 
@@ -22,5 +21,4 @@ public class GlasseService {
         Optional<Glasses> obj = repository.findById(id);
         return obj.get();
     }
-
 }

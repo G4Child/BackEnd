@@ -1,54 +1,47 @@
 package com.Glass4Child.project.entities;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor @Data
 public class Donate implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String date;
+    private Instant date;
     private String price;
+    @OneToMany
+    @JoinColumn(name="donate_id")
+    private List<Record> record;
 
 
     @ManyToMany
     @JoinTable(name = "PaymentRecord")
-    private List<Payment> Payment;
+    private List<Payment> payments;
 
     @ManyToMany
-    @JoinTable(name = "Record")
-    private List<Glasses> Glasses;
-
-
-
+    @JoinTable(name = "record")
+    private List<Glasses> glasses;
 
     @JoinColumn(name="beneficent_id")
     @ManyToOne
-    private Beneficent Beneficent;
+    private Beneficent beneficent;
     @OneToOne
-    private Dependent Dependent;
-    public Donate(String date, String price, Beneficent Beneficent, Dependent Dependent, List<Glasses> Glasses, List<Payment> Payment) {
+    private Dependent dependent;
+
+    public Donate(Instant date, String price, List<Record> record, Beneficent beneficent, Dependent dependent) {
         this.date = date;
         this.price = price;
-        this.Beneficent= Beneficent;
-        this.Dependent= Dependent;
-        this.Glasses = Glasses;
-
-        this.Payment= Payment;
-    }
-
-    public Donate() {
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getPrice() {
-        return price;
+        this.record = record;
+        this.beneficent = beneficent;
+        this.dependent = dependent;
     }
 }

@@ -6,16 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.Glass4Child.project.entities.Beneficent;
 import com.Glass4Child.project.services.BeneficentService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/beneficent")
+@RequestMapping(value = "/beneficents")
 public class BeneficentResource {
-
     @Autowired
     private BeneficentService service;
 

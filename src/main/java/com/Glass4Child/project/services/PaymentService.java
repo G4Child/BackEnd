@@ -20,6 +20,5 @@ public class PaymentService {
     public Payment findById(Long id) {
         Optional<Payment> obj = repository.findById(id);
         return obj.get();
-
     }
 }

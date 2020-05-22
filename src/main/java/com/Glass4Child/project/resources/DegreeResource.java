@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/degrees")
-public class DegreeResouce {
+public class DegreeResource {
     @Autowired
     private DegreeService service;
 
