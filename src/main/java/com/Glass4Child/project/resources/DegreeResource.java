@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/Degree")
+@RequestMapping(value = "/degrees")
 public class DegreeResouce {
-
-
     @Autowired
     private DegreeService service;
 
     @GetMapping
     public ResponseEntity<List<Degree>> findAll() {
-
         List<Degree> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
@@ -31,6 +28,4 @@ public class DegreeResouce {
         Degree obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
-
-
 }
