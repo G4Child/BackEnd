@@ -36,6 +36,8 @@ public class TestConfig implements CommandLineRunner {
     private RecordRepository RecordRepository;
     @Autowired
     private GlassesStoreRepository glassesStoreRepository;
+    @Autowired
+    private LoginRepository loginRepository;
 
     public void run(String... args) throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,13 +50,22 @@ public class TestConfig implements CommandLineRunner {
         Address addressGStoreF = new Address(680, null, "SP", "Sao Paulo", "Santo Amaro", "Otica Filial", "Av Sto Amaro");
         addressRepository.saveAll(Arrays.asList(address1, address2, address3, addressGStore, addressGStoreF));
 
+//       ################################### LOGIN ##########################################
+        Login login = new Login("teste@teste.com", "12345");
+        Login login1 = new Login("teste1@teste.com", "12345");
+        Login login2 = new Login("teste2@teste.com", "12345");
+        Login login3 = new Login("teste3@teste.com", "12345");
+        Login login4 = new Login("teste4@teste.com", "12345");
+        Login login5 = new Login("teste5@teste.com", "12345");
+        loginRepository.saveAll(Arrays.asList(login,login1, login2, login3, login4, login5));
+
 //       ################################### BENEFICENT ##########################################
-        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "63340982090", 300, "T-Thalles", formatter.parse("1985-05-05"), address1);
-        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", 2599, "Rosha Guevi", formatter.parse("1958-02-24"), address2);
+        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "63340982090", 300, "T-Thalles", formatter.parse("1985-05-05"), address1, login);
+        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", 2599, "Rosha Guevi", formatter.parse("1958-02-24"), address2, login1);
         beneficentRepository.saveAll(Arrays.asList(beneficent1, beneficent2));
 
 //       ################################### BENEFITED ##########################################
-        Benefited benefited1 = new Benefited("Joao Alves", (long) 11921921, "394821911", 2, 3, "2020211", formatter.parse("1985-05-05"), address3);
+        Benefited benefited1 = new Benefited("Joao Alves", (long) 11921921, "394821911", 2, 3, "2020211", formatter.parse("1985-05-05"), address3, login2);
         benefitedRepository.save(benefited1);
 
 //       ################################### DEPENDENT ##########################################
@@ -76,8 +87,8 @@ public class TestConfig implements CommandLineRunner {
         DonationRepository.save(donation);
 
 //       ################################### GLASSES STORE ##########################################
-        GlassesStore glassesStore = new GlassesStore("OTICA-G4C", (long)118393198, "82189347000199", addressGStore , null);
-        GlassesStore glassesStoreAgency = new GlassesStore("OTICA-G4C-FILIAL", (long)118393198, "82189347000199", addressGStoreF , null);
+        GlassesStore glassesStore = new GlassesStore("OTICA-G4C", (long)118393198, "82189347000199", addressGStore, login4);
+        GlassesStore glassesStoreAgency = new GlassesStore("OTICA-G4C-FILIAL", (long)118393198, "82189347000199", addressGStoreF, login5);
         glassesStoreRepository.saveAll(Arrays.asList(glassesStore,glassesStoreAgency));
 //
 //       ################################### GLASSES ##########################################

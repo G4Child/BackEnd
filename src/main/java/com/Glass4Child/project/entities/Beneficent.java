@@ -33,8 +33,8 @@ public class Beneficent extends User implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
 
-    public Beneficent(String name, Long telephone, String document, Integer donationLimit, Integer totalDonatedBeneficent, String pseudonym, Date bornDate, Address address) {
-        super(name, telephone, address);
+    public Beneficent(String name, Long telephone, String document, Integer donationLimit, Integer totalDonatedBeneficent, String pseudonym, Date bornDate, Address address, Login login) {
+        super(name, telephone, address, login);
         this.document = document;
         this.donationLimit = donationLimit;
         this.totalDonated = totalDonatedBeneficent;
@@ -43,8 +43,8 @@ public class Beneficent extends User implements Serializable {
         this.bornDate = bornDate;
     }
 
-    public Beneficent(String name, Long telephone, String document, Integer donationLimit, String pseudonym, Date bornDate, Address address) {
-        super(name, telephone, address);
+    public Beneficent(String name, Long telephone, String document, Integer donationLimit, String pseudonym, Date bornDate, Address address, Login login) {
+        super(name, telephone, address, login);
         this.document = document;
         this.donationLimit = donationLimit;
         this.totalDonated = 0;

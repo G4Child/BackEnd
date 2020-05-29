@@ -24,10 +24,15 @@ public abstract class User implements Serializable {
     @OneToOne
     protected Address address;
 
-    public User(String name, Long telephone, Address address) {
+    @NonNull
+    @OneToOne
+    protected Login login;
+
+    public User(String name, Long telephone, Address address, Login login) {
         super();
         this.name = name;
         this.telephone = telephone;
         this.address = address;
+        this.login = login;
     }
 }

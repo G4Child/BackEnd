@@ -32,8 +32,8 @@ public class Benefited extends User implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
 
-    public Benefited(String name, Long telephone, String document, Integer amountDependents, Integer limitDependents, String nis, Date bornDate, Address address) {
-        super(name, telephone, address);
+    public Benefited(String name, Long telephone, String document, Integer amountDependents, Integer limitDependents, String nis, Date bornDate, Address address, Login login) {
+        super(name, telephone, address, login);
         this.document = document;
         this.bornDate = bornDate;
         this.amountDependents = amountDependents;

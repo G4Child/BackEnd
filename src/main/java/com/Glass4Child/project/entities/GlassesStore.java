@@ -21,9 +21,8 @@ public class GlassesStore extends User implements Serializable {
     @NonNull
     private String document;
 
-    public GlassesStore(String name, Long telephone, String document, Address address, Long id) {
-        super(name, telephone, address);
+    public GlassesStore(String name, Long telephone, String document, Address address, Login login) {
+        super(name, telephone, address, login);
         this.document = document;
-        this.id = id;
     }
 }
