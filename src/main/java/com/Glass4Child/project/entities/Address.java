@@ -2,6 +2,7 @@ package com.Glass4Child.project.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Entity
 @Data @NoArgsConstructor
 //@Table(name = "tb_ADDRESS")
+//@RequiredArgsConstructor(onConstructor = true)
 public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
 

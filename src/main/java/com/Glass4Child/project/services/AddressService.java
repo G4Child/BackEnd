@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class AddressService {
-
     @Autowired
     private AddressRepository repository;
 
@@ -19,8 +18,7 @@ public class AddressService {
     }
 
     public Address findById(Long id) {
-		Optional<Address> obj = repository.findById(id);
+        Optional<Address> obj = repository.findById(id);
         return obj.get();
     }
 }
-

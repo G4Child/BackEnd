@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/benefited")
+@RequestMapping(value = "/benefiteds")
 public class BenefitedResource {
-
     @Autowired
     private BenefitedService service;
 
