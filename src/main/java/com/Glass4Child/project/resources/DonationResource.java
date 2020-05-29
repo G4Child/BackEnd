@@ -1,7 +1,7 @@
 package com.Glass4Child.project.resources;
 
-import com.Glass4Child.project.entities.Degree;
-import com.Glass4Child.project.services.DegreeService;
+import com.Glass4Child.project.entities.Donation;
+import com.Glass4Child.project.services.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/degrees")
-public class DegreeResource {
+@RequestMapping(value = "/donations")
+public class DonationResource {
     @Autowired
-    private DegreeService service;
+    private DonationService service;
 
     @GetMapping
-    public ResponseEntity<List<Degree>> findAll() {
-        List<Degree> list = service.findAll();
+    public ResponseEntity<List<Donation>> findAll() {
+        List<Donation> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Degree> findById(@PathVariable Long id) {
-        Degree obj = service.findById(id);
+    public ResponseEntity<Donation> findById(@PathVariable Long id) {
+        Donation obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 }

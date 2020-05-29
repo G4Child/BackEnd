@@ -24,7 +24,7 @@ public class PrescriptionResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Prescription> findByDocument(@PathVariable Long id) {
+    public ResponseEntity<Prescription> findById(@PathVariable Long id) {
         Prescription obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }

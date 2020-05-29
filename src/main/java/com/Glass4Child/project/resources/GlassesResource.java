@@ -24,7 +24,7 @@ public class GlassesResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Glasses> findByDocument(@PathVariable Long id) {
+    public ResponseEntity<Glasses> findById(@PathVariable Long id) {
         Glasses obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }

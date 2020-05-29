@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.*;
 
 @Configuration
@@ -26,74 +25,83 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private PrescriptionRepository PrescriptionRepository;
     @Autowired
-    private DonateRepository DonateRepository;
-
+    private DonationRepository DonationRepository;
     @Autowired
-    private GlasseRepository GlasseRepository;
+    private GlassesRepository GlassesRepository;
     @Autowired
     private DegreeRepository DegreeRepository;
     @Autowired
     private PaymentRepository PaymentRepository;
     @Autowired
     private RecordRepository RecordRepository;
+    @Autowired
+    private GlassesStoreRepository glassesStoreRepository;
 
     public void run(String... args) throws Exception {
-        Payment py1 = new Payment(Instant.parse("1990-01-01T12:10:00.000Z"), "boleto");
-        Payment py2 = new Payment(Instant.parse("1990-01-01T12:10:00.000Z"), "cartao");
-        Payment py3 = new Payment(Instant.parse("1981-12-01T12:10:00.000Z"), "dinheiro");
-        PaymentRepository.saveAll(Arrays.asList(py1, py2,py3));
-
-        ArrayList<Payment> paymentList = new ArrayList<>();
-        paymentList.add(py1);
-        paymentList.add(py2);
-        Degree de1 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
-        Degree de2 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
-        DegreeRepository.saveAll(Arrays.asList(de1, de2));
-
-        Prescription presc = new Prescription("exame1", de2, de1);
-
-        PrescriptionRepository.saveAll(Arrays.asList(presc));
-
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        ArrayList<Dependent> dependentsList = new ArrayList<Dependent>();
-        Dependent dep1 = new Dependent("piralho", "155155", "11-05", "filhao", presc);
-        Dependent dep2 = new Dependent("piralha", "155154", "10-05", "filha", presc);
-        dependentsList.add(dep1);
-        dependentsList.add(dep2);
+//       ################################### ADDRESS ##########################################
+        Address address1 = new Address(5859, "Residencial Masculino", "SP", "Sao Paulo", "Capão Redondo", "UNASP", "Estrada de Itapecerica");
+        Address address2 = new Address(1349, null, "SP", "Sao Paulo", "Berrini", "Praça no inicio da Berrini", "Rua Arizona");
+        Address address3 = new Address(1520, null, "SP", "Sao Paulo", "Berrini", "Sem referências", "Av Berrini");
+        Address addressGStore = new Address(581, null, "SP", "Sao Paulo", "Santo Amaro", "Otica", "Av Sto Amaro");
+        Address addressGStoreF = new Address(680, null, "SP", "Sao Paulo", "Santo Amaro", "Otica Filial", "Av Sto Amaro");
+        addressRepository.saveAll(Arrays.asList(address1, address2, address3, addressGStore, addressGStoreF));
 
+//       ################################### BENEFICENT ##########################################
+        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "63340982090", 300, "T-Thalles", formatter.parse("1985-05-05"), address1);
+        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", 2599, "Rosha Guevi", formatter.parse("1958-02-24"), address2);
+        beneficentRepository.saveAll(Arrays.asList(beneficent1, beneficent2));
+
+//       ################################### BENEFITED ##########################################
+        Benefited benefited1 = new Benefited("Joao Alves", (long) 11921921, "394821911", 2, 3, "2020211", formatter.parse("1985-05-05"), address3);
+        benefitedRepository.save(benefited1);
+
+//       ################################### DEPENDENT ##########################################
+        Dependent dep1 = new Dependent("Joao Junior Alves", "155151", formatter.parse("2008-12-05"), "Filho", benefited1);
+        Dependent dep2 = new Dependent("Samilly Alves", "155152", formatter.parse("2009-01-05"), "Filha", benefited1);
         DependentRepository.saveAll(Arrays.asList(dep1, dep2));
-        Address ad1 = new Address(5859, "Residencial Masculino", "SP", "Sao Paulo", "Capão Redondo", "UNASP", "Estrada de Itapecerica");
-        Address ad2 = new Address(1349, null, "SP", "Sao Paulo", "Berrini", "Praça no inicio da Berrini", "Rua Arizona");
-        Address ad3 = new Address(1520, null, "SP", "Sao Paulo", "Berrini", "Sem referências", "Av Berrini");
-        addressRepository.saveAll(Arrays.asList(ad1, ad2, ad3));
 
-        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "12345678", 300, "T-Thalles", formatter.parse("1985-05-05"), ad1);
-        Beneficent beneficent2 = new Beneficent("Thauã Oliveira", (long) 219999, "123456789", 500, 500, "Sr-Thauã", formatter.parse("1985-05-05"), ad2);
-        Beneficent beneficent3 = new Beneficent("cauã Oliver", (long) 21666, "547474", 500, 500, "Sr-cauã", formatter.parse("1985-05-05"), ad2);
-        beneficentRepository.saveAll(Arrays.asList(beneficent1, beneficent2, beneficent3));
+//       ################################### DEGREE ##########################################
+        Degree deg1 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
+        Degree deg2 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
+        DegreeRepository.saveAll(Arrays.asList(deg1, deg2));
 
-        Benefited benefited1 = new Benefited("Joao Alves", (long) 11921921, "394821911", 2, 3, "2020211", formatter.parse("1985-05-05"), ad3, dependentsList);
-        benefitedRepository.saveAll(Arrays.asList(benefited1));
+//       ################################### PRESCRIPTION ##########################################
+        Prescription prescription = new Prescription("s3-1", deg1, deg2, dep1);
+        PrescriptionRepository.save(prescription);
 
+//       ################################### DONATION ##########################################
+        Donation donation = new Donation(150.0, beneficent1);
+        DonationRepository.save(donation);
 
+//       ################################### GLASSES STORE ##########################################
+        GlassesStore glassesStore = new GlassesStore("OTICA-G4C", (long)118393198, "82189347000199", addressGStore , null);
+        GlassesStore glassesStoreAgency = new GlassesStore("OTICA-G4C-FILIAL", (long)118393198, "82189347000199", addressGStoreF , null);
+        glassesStoreRepository.saveAll(Arrays.asList(glassesStore,glassesStoreAgency));
+//
+//       ################################### GLASSES ##########################################
+        Glasses glasses1 = new Glasses(150, dep1, glassesStore);
+        Glasses glasses2 = new Glasses(300, dep2, glassesStoreAgency);
+        GlassesRepository.saveAll(Arrays.asList(glasses1, glasses2));
 
-        Glasses glasses1 = new Glasses(150);
-        Glasses glasses2 = new Glasses(300);
-        Glasses glasses3 = new Glasses(600);
-        ArrayList<Glasses> glassesList = new ArrayList<Glasses>();
-        glassesList.add(glasses1);
-        glassesList.add(glasses2);
+//       ################################### RECORD ##########################################
+        Record rec1 = new Record("STARTED", donation, glasses1);
+        Record rec2 = new Record("STARTED", donation, glasses2);
 
-        GlasseRepository.saveAll(Arrays.asList(glasses1, glasses2, glasses3));
-        Donate donate = new Donate(Instant.parse("2020-01-01T12:10:00.000Z"), "150",  beneficent1, dep1);
-        Donate donate1 = new Donate(Instant.parse("2019-11-01T12:10:00.000Z"), "300", beneficent1, dep1);
-        DonateRepository.saveAll(Arrays.asList(donate,donate1));
-        Record rec1 = new Record(formatter.parse("1985-05-05"), "ativo",paymentList,donate1,glasses1);
-        Record rec2 = new Record(formatter.parse("1985-06-05"), "no ativo",paymentList,donate,glasses2);
         ArrayList<Record> recordsList = new ArrayList<>();
         recordsList.add(rec1);
         recordsList.add(rec2);
         RecordRepository.saveAll(Arrays.asList(rec1, rec2));
+
+        ArrayList<Record> recordsList2 = new ArrayList<>();
+        recordsList2.add(rec1);
+        recordsList2.add(rec2);
+        RecordRepository.save(rec1);
+
+//       ################################### PAYMENT ##########################################
+        Payment payment = new Payment("SLIP", 100.0, recordsList);
+        Payment payment1 = new Payment("CREDIT", 300.0, recordsList2);
+        PaymentRepository.saveAll(Arrays.asList(payment, payment1));
     }
 }

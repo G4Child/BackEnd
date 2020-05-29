@@ -1,6 +1,8 @@
 package com.Glass4Child.project.entities;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,22 +11,27 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
+@Getter
+@EqualsAndHashCode
 public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Instant date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    private Instant date = Instant.now();
     private String paymentMethod;
-    @ManyToMany
-    @JoinTable(name = "paymentRecord")
-    private List<Record> record;
+    private double amount;
 
-    public Payment(Instant date, String paymentMethod) {
-        this.date = date;
+    @ManyToMany
+    @JoinTable
+    private List<Record> records;
+
+    public Payment(String paymentMethod, double amount, List<Record> recordList) {
         this.paymentMethod = paymentMethod;
+        this.amount = amount;
+        this.records = recordList;
     }
 }

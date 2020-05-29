@@ -23,7 +23,7 @@ public class PaymentResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Payment> findByDocument(@PathVariable Long id) {
+    public ResponseEntity<Payment> findById(@PathVariable Long id) {
         Payment obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }

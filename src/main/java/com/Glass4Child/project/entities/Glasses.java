@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Data
@@ -18,13 +17,16 @@ public class Glasses implements Serializable {
     private Long id;
     private float price;
 
+    @ManyToOne
+    @JoinColumn
+    private Dependent dependent;
 
+    @OneToOne
+    private GlassesStore glassesStore;
 
-    @OneToMany(mappedBy = "glasses")
-    private List<Record> record;
-
-    public Glasses(float price) {
+    public Glasses(float price, Dependent dependent, GlassesStore glassesStore) {
         this.price = price;
-
+        this.dependent = dependent;
+        this.glassesStore = glassesStore;
     }
 }

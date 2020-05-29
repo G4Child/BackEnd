@@ -1,14 +1,20 @@
 package com.Glass4Child.project.entities;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Id;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Data @NoArgsConstructor
+@Getter
+@EqualsAndHashCode
+@NoArgsConstructor
 public class Dependent implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -16,26 +22,23 @@ public class Dependent implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Prescription prescription;
-
-    @OneToOne
-    private Donate donate;
-
     @ManyToOne
-    @JoinColumn(name = "benefited_id")
+    @JoinColumn
     protected Benefited benefited;
 
     private String nome;
     private String document;
-    private String bornDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+    private Date bornDate;
     private String kinship;
+    @Setter
+    private boolean isActive = true;
 
-    public Dependent(String nome, String document, String bornDate, String kinship, Prescription prescription) {
+    public Dependent(String nome, String document, Date bornDate, String kinship, Benefited benefited) {
         this.nome = nome;
         this.document = document;
         this.bornDate = bornDate;
         this.kinship = kinship;
-        this.prescription = prescription;
+        this.benefited = benefited;
     }
 }

@@ -1,11 +1,11 @@
 package com.Glass4Child.project.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -13,6 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Beneficent extends User implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @NonNull
+    private String document;
 
     @Getter
     @Setter
@@ -26,29 +30,26 @@ public class Beneficent extends User implements Serializable {
     @Setter
     private String pseudonym;
     @Getter
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
 
-    @JoinColumn(name = "beneficent_id")
-    @OneToMany
-    private List<Donate> donate;
-
     public Beneficent(String name, Long telephone, String document, Integer donationLimit, Integer totalDonatedBeneficent, String pseudonym, Date bornDate, Address address) {
-        super(name, telephone, document, address);
+        super(name, telephone, address);
+        this.document = document;
         this.donationLimit = donationLimit;
         this.totalDonated = totalDonatedBeneficent;
         this.everDonated = true;
         this.pseudonym = pseudonym;
         this.bornDate = bornDate;
-        this.address = address;
     }
 
     public Beneficent(String name, Long telephone, String document, Integer donationLimit, String pseudonym, Date bornDate, Address address) {
-        super(name, telephone, document, address);
+        super(name, telephone, address);
+        this.document = document;
         this.donationLimit = donationLimit;
         this.totalDonated = 0;
         this.everDonated = false;
         this.pseudonym = pseudonym;
         this.bornDate = bornDate;
-        this.address = address;
     }
 }

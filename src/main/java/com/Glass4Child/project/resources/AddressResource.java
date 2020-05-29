@@ -24,7 +24,7 @@ public class AddressResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Address> findByDocument(@PathVariable Long id) {
+    public ResponseEntity<Address> findById(@PathVariable Long id) {
         Address obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }

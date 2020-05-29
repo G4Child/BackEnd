@@ -23,7 +23,7 @@ public class RecordResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Record> findByDocument(@PathVariable Long id) {
+    public ResponseEntity<Record> findById(@PathVariable Long id) {
         Record obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }

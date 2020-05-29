@@ -1,13 +1,16 @@
 package com.Glass4Child.project.entities;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
+@Getter
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Prescription implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -15,19 +18,26 @@ public class Prescription implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String attach;
+
+    @NonNull
+    private String examAttach;
 
     @OneToOne
-    @JoinColumn(name = "id_near")
+    @JoinColumn
     private Degree nearDegree;
 
     @OneToOne
-    @JoinColumn(name = "id_far")
+    @JoinColumn
     private Degree farDegree;
 
-    public Prescription(String attach, Degree nearDegree, Degree farDegree) {
-        this.attach = attach;
+    @ManyToOne
+    @JoinColumn
+    private Dependent dependent;
+
+    public Prescription(String examAttach, Degree nearDegree, Degree farDegree, Dependent dependent) {
+        this.examAttach = examAttach;
         this.nearDegree = nearDegree;
         this.farDegree = farDegree;
+        this.dependent = dependent;
     }
 }
