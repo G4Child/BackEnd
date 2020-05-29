@@ -22,6 +22,8 @@ public class Prescription implements Serializable {
     @NonNull
     private String examAttach;
 
+    private String comments;
+
     @OneToOne
     @JoinColumn
     private Degree nearDegree;
@@ -34,10 +36,11 @@ public class Prescription implements Serializable {
     @JoinColumn
     private Dependent dependent;
 
-    public Prescription(String examAttach, Degree nearDegree, Degree farDegree, Dependent dependent) {
+    public Prescription(String examAttach, String comments, Degree nearDegree, Degree farDegree, Dependent dependent) {
         this.examAttach = examAttach;
         this.nearDegree = nearDegree;
         this.farDegree = farDegree;
         this.dependent = dependent;
+        this.comments = comments;
     }
 }

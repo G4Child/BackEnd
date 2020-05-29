@@ -79,7 +79,7 @@ public class TestConfig implements CommandLineRunner {
         DegreeRepository.saveAll(Arrays.asList(deg1, deg2));
 
 //       ################################### PRESCRIPTION ##########################################
-        Prescription prescription = new Prescription("s3-1", deg1, deg2, dep1);
+        Prescription prescription = new Prescription("s3-1", null, deg1, deg2, dep1);
         PrescriptionRepository.save(prescription);
 
 //       ################################### DONATION ##########################################
