@@ -1,36 +1,38 @@
 package com.Glass4Child.project.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@MappedSuperclass @NoArgsConstructor @EqualsAndHashCode
+@MappedSuperclass
+@NoArgsConstructor
+@EqualsAndHashCode
+@Getter
 public abstract class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @Getter
-    private String document;
-    @Getter
+    @NonNull
     private String name;
-    @Getter @Setter
+    @Setter
+    @NonNull
     private Long telephone;
-    @Getter @Setter
-    private boolean isActive;
+    @Setter
+    private boolean isActive = true;
 
+    @NonNull
     @OneToOne
     protected Address address;
 
-    public User(String name, Long telephone, String document, Address address) {
+    @NonNull
+    @OneToOne
+    protected Login login;
+
+    public User(String name, Long telephone, Address address, Login login) {
         super();
         this.name = name;
         this.telephone = telephone;
-        this.document = document;
         this.address = address;
-        isActive = true;
+        this.login = login;
     }
 }
