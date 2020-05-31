@@ -3,11 +3,9 @@ package com.Glass4Child.project.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -18,6 +16,11 @@ public class Degree implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name="id", insertable = false, updatable = false, nullable = false)
+//    private UUID id;
 
     private String sphere_L;
     private String sphere_R;

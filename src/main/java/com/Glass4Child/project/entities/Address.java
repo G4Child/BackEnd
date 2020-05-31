@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Data @NoArgsConstructor
@@ -16,9 +17,14 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //  @Column(name = "ID_ADDRESS")
+    @Column(name = "ID_ADDRESS")
     private Long id;
-    //	private String postalAddressCode; //TO DO: IMPLEMENT CLASS postalAddressCode
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name="id", insertable = false, updatable = false, nullable = false)
+//    private UUID id;
+
     private int number;
     private String streetAddress;
     private String complement;

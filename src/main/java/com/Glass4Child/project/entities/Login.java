@@ -2,11 +2,9 @@ package com.Glass4Child.project.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @EqualsAndHashCode
 @Data
@@ -18,6 +16,11 @@ public class Login implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name="id", insertable = false, updatable = false, nullable = false)
+//    private UUID id;
 
     private String email;
     private String password;
