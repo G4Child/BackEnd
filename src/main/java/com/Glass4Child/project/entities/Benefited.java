@@ -11,6 +11,7 @@ import java.util.Date;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
+@Getter
 @EqualsAndHashCode(callSuper = true)
 //@Table(name = "tb_BENEFITED")
 public class Benefited extends User implements Serializable {
@@ -20,15 +21,11 @@ public class Benefited extends User implements Serializable {
     @NonNull
     private String document;
 
-    @Getter
     @Setter
     private Integer amountDependents;
-    @Getter
     @Setter
     private Integer limitDependents;
-    @Getter
     private String nis;
-    @Getter
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
 
