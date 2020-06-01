@@ -21,4 +21,12 @@ public class BenefitedService {
         Optional<Benefited> obj = repository.findByDocument(document);
         return obj.get();
     }
+
+    public Benefited insert(Benefited obj) {
+        return repository.save(obj);
+    }
+
+    public void delete (String document) {
+        repository.deleteByDocument(document);
+    }
 }
