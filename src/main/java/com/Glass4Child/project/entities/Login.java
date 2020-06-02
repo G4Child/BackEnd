@@ -15,6 +15,7 @@ public class Login implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true, updatable = false)
     private Long id;
 
 //    @Id
@@ -22,7 +23,9 @@ public class Login implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
+    @Column(nullable = false, unique = true, updatable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
 
     public Login(String email, String password) {

@@ -31,7 +31,7 @@ public class Donation implements Serializable {
     private double deductedAmount = 0.0;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Beneficent beneficent;
 
     public Donation(double amount, Beneficent beneficent) {

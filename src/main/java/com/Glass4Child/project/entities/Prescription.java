@@ -17,6 +17,7 @@ public class Prescription implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(nullable = false, updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -26,6 +27,7 @@ public class Prescription implements Serializable {
 //    private UUID id;
 
     @NonNull
+    @Column(nullable = false, unique = true, updatable = false)
     private String examAttach;
 
     private String comments;
@@ -38,7 +40,7 @@ public class Prescription implements Serializable {
     @JoinColumn
     private Degree farDegree;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn
     private Dependent dependent;
 

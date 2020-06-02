@@ -7,16 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+
 
 public interface BenefitedRepository extends JpaRepository<Benefited, Long> {
-    Optional<Benefited> findByDocument(String document);
+//    Optional<Benefited> findByDocument(String document);
+
+    Benefited findByDocument(String document);
+
 
     @Transactional
     @Modifying
     @Query("delete from Benefited where document = :document")
     void deleteByDocument(@Param("document") String document);
-//    List<Benefited> deleteBenefitedByDocumentIs(String document);
 
 }

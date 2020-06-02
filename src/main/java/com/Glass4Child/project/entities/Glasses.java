@@ -22,9 +22,10 @@ public class Glasses implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
+    @Column(nullable = false)
     private float price;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn
     private Dependent dependent;
 

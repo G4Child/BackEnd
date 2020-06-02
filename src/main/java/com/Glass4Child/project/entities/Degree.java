@@ -14,6 +14,7 @@ public class Degree implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(nullable = false, updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,13 +23,21 @@ public class Degree implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
+    @Column(nullable = false, updatable = false)
     private String sphere_L;
+    @Column(nullable = false, updatable = false)
     private String sphere_R;
+    @Column(nullable = false, updatable = false)
     private String cylinder_L;
+    @Column(nullable = false, updatable = false)
     private String cylinder_R;
+    @Column(nullable = false, updatable = false)
     private String axis_L;
+    @Column(nullable = false, updatable = false)
     private String axis_R;
+    @Column(nullable = false, updatable = false)
     private String pd_L;
+    @Column(nullable = false, updatable = false)
     private String pd_R;
 
     public Degree(String sphere_L, String sphere_R, String cylinder_L, String cylinder_R, String axis_L, String axis_R, String pd_L, String pd_R) {

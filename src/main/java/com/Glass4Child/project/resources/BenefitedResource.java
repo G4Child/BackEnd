@@ -25,6 +25,9 @@ public class BenefitedResource {
     @GetMapping(value = "/{document}")
     public ResponseEntity<Benefited> findByDocument(@PathVariable String document) {
         Benefited obj = service.findByDocument(document);
+        if (obj == null){
+            return ResponseEntity.notFound().build();
+        }else
         return ResponseEntity.ok().body(obj);
     }
 
@@ -39,6 +42,7 @@ public class BenefitedResource {
     @DeleteMapping(value = "/{document}")
     public ResponseEntity<Void> delete(@PathVariable String document){
         service.delete(document);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.noContent().build();
     }
 }

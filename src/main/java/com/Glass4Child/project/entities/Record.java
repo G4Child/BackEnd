@@ -28,13 +28,14 @@ public class Record implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant date = Instant.now();
+    @Column(nullable = false, updatable = false)
     private String status;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn
     private Donation donation;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn
     private Glasses glasses;
 

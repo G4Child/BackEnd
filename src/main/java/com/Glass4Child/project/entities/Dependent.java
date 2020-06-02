@@ -32,12 +32,16 @@ public class Dependent implements Serializable {
     @JoinColumn
     protected Benefited benefited;
 
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false, unique = true, updatable = false)
     private String document;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
+    @Column(nullable = false, updatable = false)
     private String kinship;
     @Setter
+    @Column(nullable = false)
     private boolean isActive = true;
 
     public Dependent(String nome, String document, Date bornDate, String kinship, Benefited benefited) {

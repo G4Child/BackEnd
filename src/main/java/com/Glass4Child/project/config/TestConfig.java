@@ -88,7 +88,7 @@ public class TestConfig implements CommandLineRunner {
 
 //       ################################### GLASSES STORE ##########################################
         GlassesStore glassesStore = new GlassesStore("OTICA-G4C", (long)118393198, "82189347000199", addressGStore, login4);
-        GlassesStore glassesStoreAgency = new GlassesStore("OTICA-G4C-FILIAL", (long)118393198, "82189347000199", addressGStoreF, login5);
+        GlassesStore glassesStoreAgency = new GlassesStore("OTICA-G4C-FILIAL", (long)118393199, "82189347000199", addressGStoreF, login5);
         glassesStoreRepository.saveAll(Arrays.asList(glassesStore,glassesStoreAgency));
 //
 //       ################################### GLASSES ##########################################

@@ -25,6 +25,7 @@ public class GlassesStore extends User implements Serializable {
 //    private UUID id;
 
     @NonNull
+    @Column(nullable = false, updatable = false)
     private String document;
 
     public GlassesStore(String name, Long telephone, String document, Address address, Login login) {

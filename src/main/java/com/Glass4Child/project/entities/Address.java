@@ -17,7 +17,7 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_ADDRESS")
+    @Column(name = "ID_ADDRESS", nullable = false, updatable = false, unique = true)
     private Long id;
 
 //    @Id
@@ -25,12 +25,18 @@ public class Address implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
+    @Column(nullable = false)
     private int number;
+    @Column(nullable = false)
     private String streetAddress;
     private String complement;
+    @Column(nullable = false)
     private String state;
+    @Column(nullable = false)
     private String city;
+    @Column(nullable = false)
     private String neighborhood;
+    @Column(nullable = false)
     private String reference;
 
     public Address(int number, String complement, String state, String city, String neighborhood, String reference, String streetAddress) {

@@ -19,6 +19,7 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(nullable = false, updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -29,10 +30,12 @@ public class Payment implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant date = Instant.now();
+    @Column(nullable = false, updatable = false)
     private String paymentMethod;
+    @Column(nullable = false, updatable = false)
     private double amount;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable
     private List<Record> records;
 
