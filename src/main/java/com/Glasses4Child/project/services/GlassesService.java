@@ -21,4 +21,22 @@ public class GlassesService {
         Optional<Glasses> obj = repository.findById(id);
         return obj.get();
     }
+    public Glasses insert (Glasses obj){
+        return repository.save(obj);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
+    public Glasses update(Long id, Glasses obj){
+        Glasses entityUpdate = repository.getOne(id);
+        updateData(entityUpdate, obj);
+        return repository.save(entityUpdate);
+    }
+
+    public void updateData (Glasses entity, Glasses obj){
+        entity.setPrice(obj.getPrice());
+        entity.setDependent(obj.getDependent());
+    }
 }

@@ -21,4 +21,22 @@ public class PrescriptionService {
         Optional<Prescription> obj = repository.findById(id);
         return obj.get();
     }
+    public Prescription insert (Prescription obj){
+        return repository.save(obj);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
+    public Prescription update(Long id, Prescription obj){
+        Prescription entityUpdate = repository.getOne(id);
+        updateData(entityUpdate, obj);
+        return repository.save(entityUpdate);
+    }
+
+    public void updateData (Prescription entity, Prescription obj){
+        entity.setComments(obj.getComments());
+        entity.setExamAttach(obj.getExamAttach());
+    }
 }

@@ -21,4 +21,22 @@ public class DonationService {
         Optional<Donation> obj = repository.findById(id);
         return obj.get();
     }
+
+    public Donation insert (Donation obj){
+        return repository.save(obj);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
+    public Donation update(Long id, Donation obj){
+        Donation entityUpdate = repository.getOne(id);
+        updateData(entityUpdate, obj);
+        return repository.save(entityUpdate);
+    }
+
+    public void updateData (Donation entity, Donation obj){
+        entity.setDeductedAmount(obj.getDeductedAmount());
+    }
 }

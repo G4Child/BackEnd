@@ -35,6 +35,9 @@ public class Dependent implements Serializable {
     private String nome;
     @Column(nullable = false, unique = true, updatable = false)
     private String document;
+    @Setter
+    @Column(nullable = false, unique = true)
+    private String pseudonym;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
     @Column(nullable = false, updatable = false)
@@ -43,8 +46,9 @@ public class Dependent implements Serializable {
     @Column(nullable = false)
     private boolean isActive = true;
 
-    public Dependent(String nome, String document, Date bornDate, String kinship, Benefited benefited) {
+    public Dependent(String nome, String pseudonym, String document, Date bornDate, String kinship, Benefited benefited) {
         this.nome = nome;
+        this.pseudonym = pseudonym;
         this.document = document;
         this.bornDate = bornDate;
         this.kinship = kinship;

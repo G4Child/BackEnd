@@ -1,9 +1,6 @@
 package com.Glasses4Child.project.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,9 +23,11 @@ public class Prescription implements Serializable {
 //    private UUID id;
 
     @NonNull
+    @Setter
     @Column(nullable = false, unique = true, updatable = false)
     private String examAttach;
 
+    @Setter
     private String comments;
 
     @OneToOne

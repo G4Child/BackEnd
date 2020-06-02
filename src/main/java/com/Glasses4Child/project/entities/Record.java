@@ -2,13 +2,15 @@ package com.Glasses4Child.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 
-@Data
+@Getter
 @NoArgsConstructor
 @Entity
 public class Record implements Serializable {

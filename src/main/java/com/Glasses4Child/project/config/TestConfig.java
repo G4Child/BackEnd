@@ -1,7 +1,5 @@
 package com.Glasses4Child.project.config;
 
-import com.Glass4Child.project.entities.*;
-import com.Glass4Child.project.repositories.*;
 import com.Glasses4Child.project.entities.*;
 import com.Glasses4Child.project.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +60,8 @@ public class TestConfig implements CommandLineRunner {
         loginRepository.saveAll(Arrays.asList(login,login1, login2, login3, login4, login5));
 
 //       ################################### BENEFICENT ##########################################
-        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "63340982090", 300, "T-Thalles", formatter.parse("1985-05-05"), address1, login);
-        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", 2599, "Rosha Guevi", formatter.parse("1958-02-24"), address2, login1);
+        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "63340982090", 400, "T-Thalles", formatter.parse("1985-05-05"), address1, login);
+        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", 600, 300, "Rosha Guevi", formatter.parse("1958-02-24"), address2, login1);
         beneficentRepository.saveAll(Arrays.asList(beneficent1, beneficent2));
 
 //       ################################### BENEFITED ##########################################
@@ -71,8 +69,8 @@ public class TestConfig implements CommandLineRunner {
         benefitedRepository.save(benefited1);
 
 //       ################################### DEPENDENT ##########################################
-        Dependent dep1 = new Dependent("Joao Junior Alves", "155151", formatter.parse("2008-12-05"), "Filho", benefited1);
-        Dependent dep2 = new Dependent("Samilly Alves", "155152", formatter.parse("2009-01-05"), "Filha", benefited1);
+        Dependent dep1 = new Dependent("Joao Junior Alves", "Joazinho", "155151", formatter.parse("2008-12-05"), "Filho", benefited1);
+        Dependent dep2 = new Dependent("Samilly Alves","Samy", "155152", formatter.parse("2009-01-05"), "Filha", benefited1);
         DependentRepository.saveAll(Arrays.asList(dep1, dep2));
 
 //       ################################### DEGREE ##########################################

@@ -21,4 +21,12 @@ public class RecordService {
         Optional<Record> obj = repository.findById(id);
         return obj.get();
     }
+
+    public Record insert(Record obj) {
+        return repository.save(obj);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }

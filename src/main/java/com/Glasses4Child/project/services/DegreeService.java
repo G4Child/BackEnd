@@ -21,6 +21,7 @@ public class DegreeService {
         Optional<Degree> obj = repository.findById(id);
         return obj.get();
     }
+
     public Degree insert (Degree obj){
         return repository.save(obj);
     }

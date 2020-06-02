@@ -1,15 +1,15 @@
 package com.Glasses4Child.project.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Data @NoArgsConstructor
+@Getter
+@EqualsAndHashCode
+@NoArgsConstructor
 //@Table(name = "tb_ADDRESS")
 //@RequiredArgsConstructor(onConstructor = true)
 public class Address implements Serializable {
@@ -25,17 +25,24 @@ public class Address implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
+    @Setter
     @Column(nullable = false)
     private int number;
+    @Setter
     @Column(nullable = false)
     private String streetAddress;
+    @Setter
     private String complement;
+    @Setter
     @Column(nullable = false)
     private String state;
+    @Setter
     @Column(nullable = false)
     private String city;
+    @Setter
     @Column(nullable = false)
     private String neighborhood;
+    @Setter
     @Column(nullable = false)
     private String reference;
 

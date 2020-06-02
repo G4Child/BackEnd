@@ -21,4 +21,22 @@ public class DependentService {
         Optional<Dependent> obj = repository.findById(id);
         return obj.get();
     }
+    public Dependent insert (Dependent obj){
+        return repository.save(obj);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
+    public Dependent update(Long id, Dependent obj){
+        Dependent entityUpdate = repository.getOne(id);
+        updateData(entityUpdate, obj);
+        return repository.save(entityUpdate);
+    }
+
+    public void updateData (Dependent entity, Dependent obj){
+        entity.setActive(obj.isActive());
+        entity.setPseudonym(obj.getPseudonym());
+    }
 }

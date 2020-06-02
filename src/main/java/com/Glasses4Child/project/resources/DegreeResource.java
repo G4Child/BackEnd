@@ -27,6 +27,7 @@ public class DegreeResource {
         Degree obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
     @PostMapping
     public ResponseEntity<Degree> insert(@RequestBody Degree obj) {
         obj = service.insert(obj);
