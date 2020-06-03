@@ -58,6 +58,14 @@ public class TestConfig implements CommandLineRunner {
         Login login4 = new Login("teste4@teste.com", "12345");
         Login login5 = new Login("teste5@teste.com", "12345");
         loginRepository.saveAll(Arrays.asList(login,login1, login2, login3, login4, login5));
+//       ################################### DEGREE ##########################################
+        Degree deg1 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
+        Degree deg2 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
+        DegreeRepository.saveAll(Arrays.asList(deg1, deg2));
+
+//       ################################### PRESCRIPTION ##########################################
+        Prescription prescription = new Prescription("s3-1", null, deg1, deg2);
+        PrescriptionRepository.save(prescription);
 
 //       ################################### BENEFICENT ##########################################
         Beneficent beneficent1 = new Beneficent("Thales Oliveira", 119999L, "63340982090",  "T-Thalles", formatter.parse("1985-05-05"), address1, login);
@@ -69,18 +77,9 @@ public class TestConfig implements CommandLineRunner {
         benefitedRepository.save(benefited1);
 
 //       ################################### DEPENDENT ##########################################
-        Dependent dep1 = new Dependent("Joao Junior Alves", "Joazinho", "155151", formatter.parse("2008-12-05"), "Filho", benefited1);
-        Dependent dep2 = new Dependent("Samilly Alves","Samy", "155152", formatter.parse("2009-01-05"), "Filha", benefited1);
-        DependentRepository.saveAll(Arrays.asList(dep1, dep2));
-
-//       ################################### DEGREE ##########################################
-        Degree deg1 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
-        Degree deg2 = new Degree("1", "2", "3", "4", "5", "6", "7", "8");
-        DegreeRepository.saveAll(Arrays.asList(deg1, deg2));
-
-//       ################################### PRESCRIPTION ##########################################
-        Prescription prescription = new Prescription("s3-1", null, deg1, deg2, dep1);
-        PrescriptionRepository.save(prescription);
+//        Dependent dep1 = new Dependent("Joao Junior Alves", "Joazinho", "155151", formatter.parse("2008-12-05"), "Filho", benefited1, prescription);
+        Dependent dep2 = new Dependent("Samilly Alves","Samy", "155152", formatter.parse("2009-01-05"), "Filha", benefited1, prescription);
+        DependentRepository.saveAll(Arrays.asList(dep2));
 
 //       ################################### DONATION ##########################################
         Donation donation = new Donation(150.0, beneficent1);
@@ -92,23 +91,23 @@ public class TestConfig implements CommandLineRunner {
         glassesStoreRepository.saveAll(Arrays.asList(glassesStore,glassesStoreAgency));
 //
 //       ################################### GLASSES ##########################################
-        Glasses glasses1 = new Glasses(150, dep1, glassesStore);
+//        Glasses glasses1 = new Glasses(150, dep1, glassesStore);
         Glasses glasses2 = new Glasses(300, dep2, glassesStoreAgency);
-        GlassesRepository.saveAll(Arrays.asList(glasses1, glasses2));
+        GlassesRepository.saveAll(Arrays.asList(glasses2));
 
 //       ################################### RECORD ##########################################
-        Record rec1 = new Record("STARTED", donation, glasses1);
+//        Record rec1 = new Record("STARTED", donation, glasses1);
         Record rec2 = new Record("STARTED", donation, glasses2);
 
         ArrayList<Record> recordsList = new ArrayList<>();
-        recordsList.add(rec1);
+//        recordsList.add(rec1);
         recordsList.add(rec2);
-        RecordRepository.saveAll(Arrays.asList(rec1, rec2));
+        RecordRepository.saveAll(Arrays.asList(rec2));
 
         ArrayList<Record> recordsList2 = new ArrayList<>();
-        recordsList2.add(rec1);
+//        recordsList2.add(rec1);
         recordsList2.add(rec2);
-        RecordRepository.save(rec1);
+        RecordRepository.save(rec2);
 
 //       ################################### PAYMENT ##########################################
         Payment payment = new Payment("SLIP", 100.0, recordsList);

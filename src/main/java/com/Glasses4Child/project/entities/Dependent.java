@@ -9,7 +9,9 @@ import lombok.Setter;
 import javax.persistence.Id;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -47,12 +49,17 @@ public class Dependent implements Serializable {
     @Column(nullable = false)
     private boolean isActive = true;
 
-    public Dependent(String nome, String pseudonym, String document, Date bornDate, String kinship, Benefited benefited) {
+    @Setter
+    @OneToMany(mappedBy = "dependentToPrescription")
+    List<Prescription> prescriptions = new ArrayList<>();
+
+    public Dependent(String nome, String pseudonym, String document, Date bornDate, String kinship, Benefited benefited, Prescription prescription) {
         this.nome = nome;
         this.pseudonym = pseudonym;
         this.document = document;
         this.bornDate = bornDate;
         this.kinship = kinship;
         this.benefited = benefited;
+        this.prescriptions.add(prescription);
     }
 }
