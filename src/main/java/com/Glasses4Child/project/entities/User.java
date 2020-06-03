@@ -19,7 +19,8 @@ public abstract class User implements Serializable {
     @Setter
     @NonNull
     @Column(nullable = false, length = 14)
-    private Long telephone;
+    private long telephone;
+    @NonNull
     @Setter
     @Column(nullable = false)
     private boolean isActive = true;
@@ -32,7 +33,7 @@ public abstract class User implements Serializable {
     @OneToOne(optional = false)
     protected Login login;
 
-    public User(String name, Long telephone, Address address, Login login) {
+    public User(String name, long telephone, Address address, Login login) {
         this.name = name;
         this.telephone = telephone;
         this.address = address;

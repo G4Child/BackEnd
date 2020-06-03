@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class G4CApplicationTest {
+public class G4CApplicationTest {
     @Test
     public void contextLoads() {
     }

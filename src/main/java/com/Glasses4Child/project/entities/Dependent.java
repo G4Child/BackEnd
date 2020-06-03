@@ -28,7 +28,7 @@ public class Dependent implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn
     protected Benefited benefited;
 

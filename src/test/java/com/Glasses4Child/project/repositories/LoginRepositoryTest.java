@@ -20,17 +20,30 @@ public class LoginRepositoryTest {
     private LoginRepository loginRepository;
 
     @Test
-    public void checkValidMail(){
-        Login login = new Login("testes.com", "12345");
-
+    public void checkIfEmailFormatIsValid(){
         try {
+            Login login = new Login("gmail.com", "12345");
             loginRepository.save(login);
             Assert.fail();
-        }catch (ConstraintViolationException exception){
-            Assert.assertEquals("javax.validation.ConstraintViolationException: Validation failed for classes [com.Glasses4Child.project.entities.Login] during persist time for groups [javax.validation.groups.Default, ]\n" +
-                    "List of constraint violations:[\n" +
-                    "\tConstraintViolationImpl{interpolatedMessage='não é um endereço de e-mail', propertyPath=email, rootBeanClass=class com.Glasses4Child.project.entities.Login, messageTemplate='{javax.validation.constraints.Email.message}'}\n" +
-                    "]", exception.toString());
+        }catch (Exception exception){
+            Assert.assertTrue(exception.toString().contains(ConstraintViolationException.class.toString().substring(6)));
         }
+
+        try {
+            Login login2 = new Login("testes@", "12345");
+            loginRepository.save(login2);
+            Assert.fail();
+        }catch (Exception exception){
+            Assert.assertEquals(exception.toString().substring(0,45), ConstraintViolationException.class.toString().substring(6));
+        }
+    }
+
+    @Test
+    public void checkLoginDataPersistence(){
+        Login login = new Login("emailLogin@repo.com", "password99");
+        loginRepository.save(login);
+
+        Assert.assertEquals(loginRepository.findByEmail("emailLogin@repo.com").getEmail(), "emailLogin@repo.com");
+        Assert.assertEquals(loginRepository.findByEmail("emailLogin@repo.com").getPassword(), "password99");
     }
 }

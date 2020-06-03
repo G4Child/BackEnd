@@ -2,10 +2,8 @@ package com.Glasses4Child.project.repositories;
 
 import com.Glasses4Child.project.entities.Address;
 import com.Glasses4Child.project.entities.Beneficent;
-import com.Glasses4Child.project.entities.Benefited;
 import com.Glasses4Child.project.entities.Login;
-import com.Glasses4Child.project.services.LoginService;
-import org.assertj.core.api.Assertions;
+import lombok.SneakyThrows;
 import org.hibernate.id.IdentifierGenerationException;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -13,25 +11,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.orm.jpa.JpaSystemException;
-import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@DataJpaTest
+@AutoConfigureTestDatabase
 class BeneficentRepositoryTest {
 
     @Autowired
@@ -45,6 +36,7 @@ class BeneficentRepositoryTest {
 
 
     @Test
+    @SneakyThrows
     void shouldPersistBeneficentData() {
         thrown.expect(IdentifierGenerationException.class);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,38 +44,41 @@ class BeneficentRepositoryTest {
         loginRepository.save(login);
         Address address = new Address(1520, null, "SP", "Sao Paulo", "Berrini", "Sem referências", "Av Berrini");
         addressRepository.save(address);
-        Beneficent beneficent = null;
-        try {
-            beneficent = new Beneficent("Thales Oliveira",11999912L, "63340982091", "T-Thalles", formatter.parse("1992-01-12"), address, login);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+        Beneficent beneficent = new Beneficent("Thales Oliveira", 11999912L, "63340982091", "T-Thalles", formatter.parse("1992-01-12"), address, login);
         beneficentRepository.save(beneficent);
-        System.out.println(beneficent);
-        Assert.assertEquals(beneficent.getBornDate(),(new Date(92, Calendar.JANUARY, 12)));
-        Assert.assertEquals(beneficent.getDocument(), ("63340982091"));
-        Assert.assertEquals(beneficent.getName(), ("Thales Oliveira"));
-        Assert.assertEquals(beneficent.getPseudonym(), ("T-Thalles"));
-        Assertions.assertThat(beneficent.getTelephone()).isEqualTo(11999912);
-        Assert.assertEquals(beneficent.getDocument(), ("63340982091"));
+
+        Assert.assertEquals(formatter.parse("1992-01-12"), beneficentRepository.findByDocument("63340982091").getBornDate());
+        Assert.assertEquals("63340982091", beneficentRepository.findByDocument("63340982091").getDocument());
+        Assert.assertEquals("Thales Oliveira", beneficentRepository.findByDocument("63340982091").getName());
+        Assert.assertEquals("T-Thalles", beneficent.getPseudonym());
+        Assert.assertEquals(11999912L, beneficentRepository.findByDocument("63340982091").getTelephone());
     }
 
     @Test
-    void createBeneficentWithNullFields() {
+    public void createBeneficentWithNullFields() {
         Beneficent beneficent = new Beneficent();
         try {
             beneficentRepository.save(beneficent);
             Assert.fail();
-        } catch (JpaSystemException exception) {
-            Assert.assertEquals("org.springframework.orm.jpa.JpaSystemException: ids for this class must be manually assigned before calling save(): com.Glasses4Child.project.entities.Beneficent; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.Glasses4Child.project.entities.Beneficent", exception.toString());
+        } catch (Exception exception) {
+            Assert.assertTrue(exception.toString().contains(JpaSystemException.class.toString().substring(6)));
         }
     }
 
     @Test
-    void findByDocument() {
-    }
+    @SneakyThrows
+    public void beneficentEqualAsSaved() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Login login = new Login("teste2beneficent@teste.com.br", "12345");
+        loginRepository.save(login);
+        Address address = new Address(1520, null, "SP", "Sao Paulo", "Berrini", "Sem referências", "Av Berrini");
+        addressRepository.save(address);
 
-    @Test
-    void deleteByDocument() {
+        Beneficent beneficent = new Beneficent("Thales Oliveira", 118799912L, "63340982092", "T-Thalles", formatter.parse("1992-01-12"), address, login);
+        beneficentRepository.save(beneficent);
+
+        Assert.assertEquals("63340982092", beneficentRepository.findByDocument("63340982092").getDocument());
+        Assert.assertEquals(beneficent, beneficentRepository.findByDocument("63340982092"));
     }
 }
