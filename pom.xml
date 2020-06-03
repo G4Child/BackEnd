@@ -12,7 +12,7 @@
 	<groupId>com.Glass4Child</groupId>
 	<artifactId>project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>project</name>
+	<name>G4C</name>
 	<description>Project with Spring Boot</description>
 
 	<properties>
@@ -61,6 +61,25 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.5.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.5.2</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
