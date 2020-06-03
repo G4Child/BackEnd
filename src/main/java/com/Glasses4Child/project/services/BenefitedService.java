@@ -40,6 +40,7 @@ public class BenefitedService {
     }
 
     private void updateData(Benefited entity, Benefited obj) {
+        entity.setName(obj.getName());
         entity.setAmountDependents(obj.getAmountDependents());
         entity.setLimitDependents(obj.getLimitDependents());
         entity.setTelephone(obj.getTelephone());

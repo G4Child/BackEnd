@@ -3,6 +3,7 @@ package com.Glasses4Child.project.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public class Login implements Serializable {
 //    @Column(name="id", insertable = false, updatable = false, nullable = false)
 //    private UUID id;
 
+    @Email
     @Setter
     @Column(nullable = false, unique = true, updatable = false)
     private String email;

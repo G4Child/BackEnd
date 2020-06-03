@@ -60,8 +60,8 @@ public class TestConfig implements CommandLineRunner {
         loginRepository.saveAll(Arrays.asList(login,login1, login2, login3, login4, login5));
 
 //       ################################### BENEFICENT ##########################################
-        Beneficent beneficent1 = new Beneficent("Thales Oliveira", (long) 119999, "63340982090", 400, "T-Thalles", formatter.parse("1985-05-05"), address1, login);
-        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", 600, 300, "Rosha Guevi", formatter.parse("1958-02-24"), address2, login1);
+        Beneficent beneficent1 = new Beneficent("Thales Oliveira", 119999L, "63340982090",  "T-Thalles", formatter.parse("1985-05-05"), address1, login);
+        Beneficent beneficent2 = new Beneficent("Artemis Vieira", 5511906L, "95791865457", "Rosha Guevi", formatter.parse("1958-02-24"), address2, login1);
         beneficentRepository.saveAll(Arrays.asList(beneficent1, beneficent2));
 
 //       ################################### BENEFITED ##########################################

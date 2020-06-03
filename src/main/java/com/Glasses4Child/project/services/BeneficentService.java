@@ -40,9 +40,6 @@ public class BeneficentService {
     }
 
     private void updateData (Beneficent entity, Beneficent obj){
-        entity.setDonationLimit(obj.getDonationLimit());
-        entity.setTotalDonated(obj.getTotalDonated());
-        entity.setEverDonated(obj.getEverDonated());
         entity.setActive(obj.isActive());
         entity.setTelephone(obj.getTelephone());
     }

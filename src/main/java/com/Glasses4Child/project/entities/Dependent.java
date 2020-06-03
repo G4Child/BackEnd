@@ -19,6 +19,7 @@ public class Dependent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(nullable = false, unique = true, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

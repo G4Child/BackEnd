@@ -20,32 +20,24 @@ public class Beneficent extends User implements Serializable {
     private String document;
 
     @Setter
-    private Integer donationLimit = 0;
-    @Setter
-    private Integer totalDonated = 0;
-    @Setter
-    private Boolean everDonated = false;
-    @Setter
     private String pseudonym;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
     private Date bornDate;
 
-    public Beneficent(String name, Long telephone, String document, Integer donationLimit, Integer totalDonatedBeneficent, String pseudonym, Date bornDate, Address address, Login login) {
+    @OneToOne
+    Prescription prescription;
+
+    public Beneficent(String name, Long telephone, String document, String pseudonym, Date bornDate, Address address, Login login, Prescription prescription) {
         super(name, telephone, address, login);
         this.document = document;
-        this.donationLimit = donationLimit;
-        this.totalDonated = totalDonatedBeneficent;
-        this.everDonated = true;
         this.pseudonym = pseudonym;
         this.bornDate = bornDate;
+        this.prescription = prescription;
     }
 
-    public Beneficent(String name, Long telephone, String document, Integer donationLimit, String pseudonym, Date bornDate, Address address, Login login) {
+    public Beneficent(String name, Long telephone, String document, String pseudonym, Date bornDate, Address address, Login login) {
         super(name, telephone, address, login);
         this.document = document;
-        this.donationLimit = donationLimit;
-        this.totalDonated = 0;
-        this.everDonated = false;
         this.pseudonym = pseudonym;
         this.bornDate = bornDate;
     }

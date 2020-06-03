@@ -13,11 +13,12 @@ public abstract class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NonNull
+    @Setter
     @Column(nullable = false)
     private String name;
     @Setter
     @NonNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 14)
     private Long telephone;
     @Setter
     @Column(nullable = false)
