@@ -14,13 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
@@ -42,19 +39,19 @@ class DependentRepositoryTest {
 
     @SneakyThrows
     @Test
-    public void mustPersistDependentData(){
+    public void mustPersistDependentData() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        Address addressUnit = new Address (581, null, "SP", "Sao Paulo", "Santo Amaro", "Otica", "Av Sto Amaro");
+        Address addressUnit = new Address(581, null, "SP", "Sao Paulo", "Santo Amaro", "Otica", "Av Sto Amaro");
         addressRepository.save(addressUnit);
         Login loginUnit = new Login("bneficent.junit@teste.com", "12345");
         loginRepository.save(loginUnit);
-        Benefited benefitedUnit = new Benefited("Joao Alves", (long) 11921921, "394821191112", 2, 3, "2020213", formatter.parse("1985-05-05"), addressUnit, loginUnit);
+        Benefited benefitedUnit = new Benefited("Joao Alves", (long) 11921921, "394821191112", 2, 3, "2020253", formatter.parse("1985-05-05"), addressUnit, loginUnit);
         benefitedRepository.save(benefitedUnit);
 
         String document = "15515112812";
 
-        Dependent dependent = new Dependent("Joao Junior Alves", "Jaozinho", document, formatter.parse("2008-12-05"), "Filho", benefitedUnit);
+        Dependent dependent = new Dependent("Joao Junior Alves", "Jaozinho421", document, formatter.parse("2008-12-05"), "Filho", benefitedUnit);
         dependentRepository.save(dependent);
 
         Assert.assertEquals(dependent.getDocument(), dependentRepository.findByDocument(document).getDocument());
@@ -65,7 +62,7 @@ class DependentRepositoryTest {
 
     @Test
     @SneakyThrows
-    public void checkIfDependentHasBenefited(){
+    public void checkIfDependentHasBenefited() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Dependent dependent = new Dependent("Joao Junior Alves", "Jaozinho", "1551511289", formatter.parse("2008-12-05"), "Filho", null);
 
@@ -79,10 +76,10 @@ class DependentRepositoryTest {
 
     @SneakyThrows
     @Test
-    public void checkIfDependentAlreadyExists(){
+    public void checkIfDependentAlreadyExists() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        Address addressUnit = new Address (581, null, "SP", "Sao Paulo", "Santo Amaro", "Otica", "Av Sto Amaro");
+        Address addressUnit = new Address(581, null, "SP", "Sao Paulo", "Santo Amaro", "Otica", "Av Sto Amaro");
         addressRepository.save(addressUnit);
         Login loginUnit = new Login("beneficent.junit@teste.com", "12345");
         loginRepository.save(loginUnit);
